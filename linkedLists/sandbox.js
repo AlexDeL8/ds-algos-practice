@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var linkedLists_1 = require("./linkedLists");
+var startNode = new linkedLists_1.LinkedListNode("1");
+var list = new linkedLists_1.LinkedList(startNode);
+list.printList();
+console.log("------");
+list.insertEnd({ value: "2" });
+console.log("------");
+list.insertFront({ value: "0" });
+list.insertNodeBefore({ value: "3" }, "4");
+list.insertNodeBefore({ value: "3" }, "2");
+list.insertNodeAfter({ value: "A" }, "3");
