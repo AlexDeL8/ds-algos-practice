@@ -4,8 +4,8 @@ class LinkedListNode {
     nextNode?: LinkedListNode
 
     constructor(value?: string, nextNode?: LinkedListNode) {
-        this.value = value ? value : "default"
-        this.nextNode = nextNode
+        this.value = value ?? "default"
+        this.nextNode = nextNode ?? undefined
     }
 }
 

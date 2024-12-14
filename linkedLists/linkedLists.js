@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkedList = exports.LinkedListNode = void 0;
 var LinkedListNode = /** @class */ (function () {
     function LinkedListNode(value, nextNode) {
-        this.value = value ? value : "default";
-        this.nextNode = nextNode;
+        this.value = value !== null && value !== void 0 ? value : "default";
+        this.nextNode = nextNode !== null && nextNode !== void 0 ? nextNode : undefined;
     }
     return LinkedListNode;
 }());
