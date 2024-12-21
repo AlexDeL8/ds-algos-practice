@@ -1,34 +1,62 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var linkedLists_1 = require("./linkedLists");
-var DoublyLinkListNode = /** @class */ (function (_super) {
-    __extends(DoublyLinkListNode, _super);
+exports.DoublyLinkListNode = exports.DoublyLinkList = void 0;
+var DoublyLinkListNode = /** @class */ (function () {
     function DoublyLinkListNode(value, nextNode, prevNode) {
-        var _this = _super.call(this, value, nextNode) || this;
-        _this.prevNode = prevNode;
-        return _this;
+        this.value = value;
+        this.nextNode = nextNode;
+        this.prevNode = prevNode;
     }
     return DoublyLinkListNode;
-}(linkedLists_1.LinkedListNode));
-var DoublyLinkList = /** @class */ (function (_super) {
-    __extends(DoublyLinkList, _super);
+}());
+exports.DoublyLinkListNode = DoublyLinkListNode;
+var DoublyLinkList = /** @class */ (function () {
     function DoublyLinkList(startingNode) {
-        return _super.call(this, startingNode) || this;
+        this.startingNode = startingNode;
     }
+    DoublyLinkList.prototype.insertFront = function (nodeToAdd) {
+        nodeToAdd.nextNode = this.startingNode;
+        this.startingNode.prevNode = nodeToAdd;
+        this.startingNode = nodeToAdd;
+        this.printList();
+    };
+    DoublyLinkList.prototype.insertEnd = function (nodeToAdd) {
+        var curr = this.startingNode;
+        while (curr) {
+            if (curr.nextNode) {
+                curr = curr.nextNode;
+            }
+            else {
+                curr.nextNode = nodeToAdd;
+                nodeToAdd.prevNode = curr;
+                break;
+            }
+        }
+        this.printList();
+    };
+    DoublyLinkList.prototype.insertNodeBefore = function (nodeToAdd, before) {
+    };
+    DoublyLinkList.prototype.insertNodeAfter = function (nodeToAdd, after) {
+    };
+    DoublyLinkList.prototype.findNodeByValue = function (valueToFind) {
+        return false;
+    };
+    DoublyLinkList.prototype.printList = function () {
+        var curr = this.startingNode;
+        while (curr) {
+            if (curr.prevNode) {
+                console.log("⬆️");
+            }
+            console.log(curr.value);
+            if (curr.nextNode) {
+                console.log("⬇️");
+                curr = curr.nextNode;
+            }
+            else {
+                break;
+            }
+        }
+    };
     return DoublyLinkList;
-}(linkedLists_1.LinkedList));
+}());
+exports.DoublyLinkList = DoublyLinkList;
