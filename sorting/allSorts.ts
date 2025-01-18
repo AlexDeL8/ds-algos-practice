@@ -34,9 +34,33 @@ Array.prototype.bubbleSort = async function(this: number[]) {
     console.log(`SORTED: ${this}`)
 }
 
-Array.prototype.mergeSort = function(this: number[]) {
-    console.log("Starting merge sort")
+function mergeSort(nums: number[]): number[] {
     debugger;
+    if (nums.length < 2) return nums;
+	let mid = Math.floor(nums.length / 2);
+	let left = nums.slice(0, mid);
+	let right = nums.slice(mid);
+	
+	function merge(left: number[], right: number[]) {
+        debugger;
+		let result = []
+		let lLen = left.length
+		let rLen = right.length 
+		let l = 0
+		let r = 0;
+		while(l < lLen && r < rLen) {
+			if(left[l] < right[r]) {
+				result.push(left[l]);
+                l++
+			}
+			else {
+				result.push(right[r]);
+                r++
+			}
+		}  
+		return result.concat(left.slice(l)).concat(right.slice(r));
+	}
+	return merge(mergeSort(left), mergeSort(right));
 }
 
 Array.prototype.quickSort = function(this:number[]) {
@@ -48,7 +72,9 @@ const randomArr1 = [48, 8, 299, 19, 65, 87, 20, 132]
 randomArr1.bubbleSort()
 
 const randomArr2 = [543, 700, 56, 90, 123, 24, 5, 999]
-randomArr2.mergeSort()
+console.log("Starting merge sort")
+const randomArr2Sorted = mergeSort(randomArr2)
+console.log(`SORTED: ${randomArr2Sorted}`)
 
 const randomArr3 = [774, 10, 45, 87, 436, 1, 8, 10]
 randomArr3.quickSort()

@@ -53,6 +53,7 @@ Array.prototype.bubbleSort = function () {
             switch (_a.label) {
                 case 0:
                     console.log("Starting bubble sort");
+                    debugger;
                     limit = this.length - 1;
                     _a.label = 1;
                 case 1:
@@ -92,10 +93,34 @@ Array.prototype.bubbleSort = function () {
         });
     });
 };
-Array.prototype.mergeSort = function () {
-    console.log("Starting merge sort");
+function mergeSort(nums) {
     debugger;
-};
+    if (nums.length < 2)
+        return nums;
+    var mid = Math.floor(nums.length / 2);
+    var left = nums.slice(0, mid);
+    var right = nums.slice(mid);
+    function merge(left, right) {
+        debugger;
+        var result = [];
+        var lLen = left.length;
+        var rLen = right.length;
+        var l = 0;
+        var r = 0;
+        while (l < lLen && r < rLen) {
+            if (left[l] < right[r]) {
+                result.push(left[l]);
+                l++;
+            }
+            else {
+                result.push(right[r]);
+                r++;
+            }
+        }
+        return result.concat(left.slice(l)).concat(right.slice(r));
+    }
+    return merge(mergeSort(left), mergeSort(right));
+}
 Array.prototype.quickSort = function () {
     console.log("Starting quick sort");
     debugger;
@@ -103,6 +128,8 @@ Array.prototype.quickSort = function () {
 var randomArr1 = [48, 8, 299, 19, 65, 87, 20, 132];
 randomArr1.bubbleSort();
 var randomArr2 = [543, 700, 56, 90, 123, 24, 5, 999];
-randomArr2.mergeSort();
+console.log("Starting merge sort");
+var randomArr2Sorted = mergeSort(randomArr2);
+console.log("SORTED: ".concat(randomArr2Sorted));
 var randomArr3 = [774, 10, 45, 87, 436, 1, 8, 10];
 randomArr3.quickSort();
