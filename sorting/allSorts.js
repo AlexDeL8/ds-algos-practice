@@ -50,46 +50,30 @@ Array.prototype.bubbleSort = function () {
     return __awaiter(this, void 0, void 0, function () {
         var limit, left, right, swapped, temp;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    console.log("Starting bubble sort");
-                    debugger;
-                    limit = this.length - 1;
-                    _a.label = 1;
-                case 1:
-                    if (!(limit > 0)) return [3 /*break*/, 7];
-                    left = 0;
-                    right = 1;
-                    swapped = false;
-                    _a.label = 2;
-                case 2:
-                    if (!(right <= limit)) return [3 /*break*/, 5];
-                    if (!(this[right] < this[left])) return [3 /*break*/, 4];
-                    temp = this[left];
-                    this[left] = this[right];
-                    this[right] = temp;
-                    swapped = true;
-                    return [4 /*yield*/, closureLog("".concat(this, " \n"))];
-                case 3:
-                    _a.sent();
-                    _a.label = 4;
-                case 4:
+            console.log("Starting bubble sort");
+            // debugger;
+            for (limit = this.length - 1; limit > 0; limit--) {
+                left = 0;
+                right = 1;
+                swapped = false;
+                while (right <= limit) {
+                    if (this[right] < this[left]) {
+                        temp = this[left];
+                        this[left] = this[right];
+                        this[right] = temp;
+                        swapped = true;
+                        // await closureLog(`${this} \n`)
+                    }
                     left++;
                     right++;
-                    return [3 /*break*/, 2];
-                case 5:
-                    if (!swapped) {
-                        console.log("Didn't perform any swaps, array is sorted");
-                        return [3 /*break*/, 7];
-                    }
-                    _a.label = 6;
-                case 6:
-                    limit--;
-                    return [3 /*break*/, 1];
-                case 7:
-                    console.log("SORTED: ".concat(this));
-                    return [2 /*return*/];
+                }
+                if (!swapped) {
+                    console.log("Didn't perform any swaps, array is sorted");
+                    break;
+                }
             }
+            console.log("SORTED: ".concat(this));
+            return [2 /*return*/];
         });
     });
 };
@@ -122,14 +106,39 @@ function mergeSort(nums) {
     return merge(mergeSort(left), mergeSort(right));
 }
 Array.prototype.quickSort = function () {
-    console.log("Starting quick sort");
     debugger;
+    function quickSortHelper(nums, start, end) {
+        debugger;
+        if (start >= end)
+            return nums;
+        var pivotValue = nums[start];
+        var smaller = start;
+        for (var i = start + 1; i <= end; i++) {
+            var bigger = i;
+            if (nums[bigger] < pivotValue) {
+                smaller++;
+                var smallerValue = nums[bigger];
+                nums[bigger] = nums[smaller];
+                nums[smaller] = smallerValue;
+            }
+        }
+        var smallerCache = nums[smaller];
+        nums[smaller] = nums[start];
+        nums[start] = smallerCache;
+        quickSortHelper(nums, start, smaller - 1);
+        quickSortHelper(nums, smaller + 1, end);
+        return nums;
+    }
+    return quickSortHelper(this, 0, this.length - 1);
 };
+// REMEMBER: comment out 'debugger;' as fit in sorting functions
 var randomArr1 = [48, 8, 299, 19, 65, 87, 20, 132];
 randomArr1.bubbleSort();
 var randomArr2 = [543, 700, 56, 90, 123, 24, 5, 999];
 console.log("Starting merge sort");
 var randomArr2Sorted = mergeSort(randomArr2);
 console.log("SORTED: ".concat(randomArr2Sorted));
-var randomArr3 = [774, 10, 45, 87, 436, 1, 8, 10];
+var randomArr3 = [8, 10, 111, 87, 436, 1, 774, 9];
+console.log("Starting quick sort");
 randomArr3.quickSort();
+console.log("SORTED: ".concat(randomArr3));

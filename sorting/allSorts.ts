@@ -10,7 +10,7 @@ async function closureLog(log: string) {
 
 Array.prototype.bubbleSort = async function(this: number[]) {
     console.log("Starting bubble sort")
-    debugger;
+    // debugger;
     for(let limit = this.length-1; limit > 0; limit--) {
         let left = 0
         let right = 1
@@ -21,7 +21,7 @@ Array.prototype.bubbleSort = async function(this: number[]) {
                 this[left] = this[right]
                 this[right] = temp
                 swapped = true
-                await closureLog(`${this} \n`)
+                // await closureLog(`${this} \n`)
             }
             left++
             right++
@@ -64,10 +64,34 @@ function mergeSort(nums: number[]): number[] {
 }
 
 Array.prototype.quickSort = function(this:number[]) {
-    console.log("Starting quick sort")
     debugger;
+    function quickSortHelper(nums: number[], start: number, end: number) {
+        debugger;
+        if (start >= end) return nums
+    
+        let pivotValue = nums[start]
+        let smaller = start
+        for (let i = start + 1; i <= end; i++) {
+            let bigger = i
+            if (nums[bigger] < pivotValue) {
+                smaller++
+                let smallerValue = nums[bigger]
+                nums[bigger] = nums[smaller]
+                nums[smaller] = smallerValue
+            }
+        }
+        let smallerCache = nums[smaller]
+        nums[smaller] = nums[start]
+        nums[start] = smallerCache
+        
+        quickSortHelper(nums, start, smaller - 1)
+        quickSortHelper(nums, smaller + 1, end)
+        return nums
+    }
+    return quickSortHelper(this, 0, this.length - 1)
 }
 
+// REMEMBER: comment out 'debugger;' as fit in sorting functions
 const randomArr1 = [48, 8, 299, 19, 65, 87, 20, 132]
 randomArr1.bubbleSort()
 
@@ -76,5 +100,7 @@ console.log("Starting merge sort")
 const randomArr2Sorted = mergeSort(randomArr2)
 console.log(`SORTED: ${randomArr2Sorted}`)
 
-const randomArr3 = [774, 10, 45, 87, 436, 1, 8, 10]
+const randomArr3 = [8, 10, 111, 87, 436, 1, 774, 9]
+console.log("Starting quick sort")
 randomArr3.quickSort()
+console.log(`SORTED: ${randomArr3}`)
