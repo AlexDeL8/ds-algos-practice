@@ -9,8 +9,9 @@ class TreeNode {
 }
 
 class Tree {
+    root: TreeNode
     constructor(root: TreeNode) {
-
+        this.root = root
     }
 }
 
@@ -27,15 +28,33 @@ class BinaryTreeNode {
 }
 
 class BinaryTree {
+    root: BinaryTreeNode | BinarySearchTreeNode
+    curr: BinaryTreeNode | BinarySearchTreeNode
     constructor(root: BinaryTreeNode) {
+        this.root = root
+        this.curr = root
+    }
+
+    insert(): boolean {
 
     }
 
+    search(): BinaryTreeNode {
+
+    }
 }
 
-class BinarySearchTree extends BinaryTree{
+class BinarySearchTree extends BinaryTree {
     constructor(root: BinaryTreeNode) {
         super(root)
+    }
+
+    insert(): boolean {
+
+    }
+
+    search(): BinarySearchTreeNode {
+
     }
 }
 
